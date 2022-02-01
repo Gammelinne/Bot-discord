@@ -71,10 +71,10 @@ const commands = [
 			
 		}]
 	},
-	/*{
+	{
 		name: 'nasa',
 		description : 'image du jour',
-	}*/
+	}
 ];
 
 const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
@@ -254,24 +254,25 @@ client.on('interactionCreate', async interaction => {
 				.setTitle(`Covid-19 en France`)
 				.setThumbnail("https://www.src-solution.com/wp-content/uploads/2020/06/img-20200602-163229-543x540-1-543x540.jpg")
 				.setDescription(`En France le ${rep.date.toString()}, il y a eu ${rep[getdonnees].toString()} ${val} `)
-		interaction.editReply({embeds: [covembed] });
+			console.log(rep)
+			interaction.editReply({embeds: [covembed] });
 	}
-	/*if (interaction.commandName === 'nasa'){
+	if (interaction.commandName === 'nasa'){
 		await interaction.deferReply()
 		var rep = 'pas de donnees'
-		await fetch(url2)
-		.then(res => res.json())
-		.then(json =>rep =json[0])
+		await fetch(`${url2}`)
+			.then(res => res.json())
+			.then(json =>rep = json)
 		let nasembed = new MessageEmbed()
 			.setColor('#33FF7D')
-			.setTitle(name.toString())
-			.setThumbnail(rep.items[0])
-			.description(rep.metadata)
-			.setDescription("test")
+			.setTitle(rep.title.toString())
+			.setURL(rep.url)
+			.setImage("https://www.nasa.gov/sites/default/files/styles/ubernode_alt_horiz/public/thumbnails/image/nasa_town_hall_bam_screen-dr.png")
+			.setDescription(rep.explanation.toString())
+			.setFooter(`API nasa, document du ${rep.date.toString()}`)
 		interaction.editReply({embeds: [nasembed]})
-		console.log(rep.explanation)
-		interaction.editReply('ok')
-	}*/
+	}
+
 });
 
 client.login(process.env.TOKEN);
