@@ -271,7 +271,7 @@ client.on('interactionCreate', async interaction => {
 		interaction.editReply({embeds: [nasembed]})
 		console.log(rep.explanation)
 		interaction.editReply('ok')
-	}*///////
+	}*/////////
 });
 
 client.login(process.env.TOKEN);
