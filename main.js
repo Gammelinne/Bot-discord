@@ -320,8 +320,12 @@ client.on("interactionCreate", async (interaction) => {
 			.setColor("#33FF7D")
 			.setTitle(rep.title.toString())
 			.setURL(rep.url)
-			.setImage(
+			.setThumbnail(
 				"https://www.nasa.gov/sites/default/files/styles/ubernode_alt_horiz/public/thumbnails/image/nasa_town_hall_bam_screen-dr.png"
+			)
+			.setImage(
+				rep.hdurl ||
+					"https://media.paperblog.fr/i/430/4303891/belles-photos-lespace-L-uvy4G_.jpeg"
 			)
 			.setDescription(rep.explanation.toString())
 			.setFooter(`API nasa, document du ${rep.date.toString()}`);
