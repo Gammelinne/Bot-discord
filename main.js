@@ -43,7 +43,7 @@ const commands = [
 		],
 	},
 	{
-		name: "github", //test
+		name: "github",
 		description: "voir mon superbe code !",
 	},
 	{
@@ -185,7 +185,7 @@ client.on("interactionCreate", async (interaction) => {
 
 			const filter = (i) =>
 				(i.customId === "yes" || i.customId === "no") &&
-				i.user.id === interaction.member.id; // j'ai rajouté un filtre comme ça tu n'as pas besoin de faire des if dans ton collect
+				i.user.id === interaction.member.id;
 
 			const collector =
 				interaction.channel.createMessageComponentCollector({
@@ -196,7 +196,6 @@ client.on("interactionCreate", async (interaction) => {
 				});
 
 			collector.on("collect", async (i) => {
-				//DOC : https://discord.js.org/#/docs/main/stable/class/ButtonInteraction?scrollTo=deferReply
 				await i.deferReply({ ephemeral: true });
 				console.log(i.customId);
 				if (i.customId == "yes") {
