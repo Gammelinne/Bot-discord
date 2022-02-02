@@ -301,12 +301,12 @@ client.on("interactionCreate", async (interaction) => {
 			.setThumbnail(
 				"https://www.src-solution.com/wp-content/uploads/2020/06/img-20200602-163229-543x540-1-543x540.jpg"
 			)
+			.setFooter("API FranceCovid")
 			.setDescription(
 				`En France le ${rep.date.toString()}, il y a eu ${rep[
 					getdonnees
 				].toString()} ${val} `
 			);
-		console.log(rep);
 		interaction.editReply({ embeds: [covembed] });
 	}
 	if (interaction.commandName === "nasa") {
@@ -327,7 +327,7 @@ client.on("interactionCreate", async (interaction) => {
 					"https://media.paperblog.fr/i/430/4303891/belles-photos-lespace-L-uvy4G_.jpeg"
 			)
 			.setDescription(rep.explanation.toString())
-			.setFooter(`API nasa, document du ${rep.date.toString()}`);
+			.setFooter(`API de la Nasa, document du ${rep.date.toString()}`);
 		interaction.editReply({ embeds: [nasembed] });
 	}
 });
