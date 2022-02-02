@@ -246,10 +246,15 @@ client.on("interactionCreate", async (interaction) => {
 			.setColor("#33FF7D")
 			.setTitle(`Serveur ${interaction.member.guild.name}`)
 			.setThumbnail(interaction.guild.iconURL())
-			.setDescription(`Salut ${interaction.user.username} !\n
+			.setDescription(
+				`Salut ${interaction.user.username} !\n
 			Il y a actuellement ${interaction.guild.memberCount} personnes formidables ici <3\n 
 			le chef de la meute est : <@${interaction.guild.ownerId}>\n
-			le ping de kikibot est de ${client.ws.ping} ms (toujours pas plus que celui de la SNCF).\n`);
+			le ping de kikibot est de ${client.ws.ping} ms (toujours pas plus que celui de la SNCF).\n`
+			)
+			.setFooter(
+				`Kikibot par ${interaction.guild.ownerId} Version 1.3.4`
+			);
 		interaction.reply({ embeds: [pingembed] });
 	}
 	if (interaction.commandName === "al") {
