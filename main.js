@@ -253,7 +253,7 @@ client.on("interactionCreate", async (interaction) => {
 			le ping de kikibot est de ${client.ws.ping} ms (toujours pas plus que celui de la SNCF).\n`
 			)
 			.setFooter(
-				`Kikibot par ${interaction.guild.ownerId} Version 1.3.4`
+				`Kikibot par <@${interaction.guild.ownerId}> Version 1.3.2`
 			);
 		interaction.reply({ embeds: [pingembed] });
 	}
