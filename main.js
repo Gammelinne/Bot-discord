@@ -16,6 +16,7 @@ const {
 const url = `https://coronavirusapifr.herokuapp.com/data/live/france`;
 const url2 =
 	"https://api.nasa.gov/planetary/apod?api_key=IHPFzp4pl4wlJYEAstrfPs12VYjHdKOkbbC8LZxo";
+const url3 = "https://entreprise.data.gouv.fr/api/rna/v1/full_text/"
 
 var mystere = Math.floor(Math.random() * 100 + 1);
 
@@ -88,6 +89,16 @@ const commands = [
 		name: "nasa",
 		description: "image du jour",
 	},
+	{
+		name: "business",
+		description: "permet de voir les infos d'une association ou d'une entreprise",
+		options: [{
+			name: "nom",
+			description:"donne le nom de ce que tu recherches",
+			required:true,
+			type: discordjs.Constants.ApplicationCommandOptionTypes.STRING,
+		}]
+	}
 ];
 
 const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
@@ -334,6 +345,13 @@ client.on("interactionCreate", async (interaction) => {
 			.setDescription(rep.explanation.toString())
 			.setFooter(`API de la Nasa, document du ${rep.date.toString()}`);
 		interaction.editReply({ embeds: [nasembed] });
+	}
+	if(interaction.commandName === "business"){
+		await interaction.deferReply();
+		var getname = interaction.options.getString("nom");
+		var rep = "pas de donnees";
+		getname = getname.split(" ").join("");
+		interaction.editReply(getname)
 	}
 });
 
