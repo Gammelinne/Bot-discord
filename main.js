@@ -11,7 +11,7 @@ const {
 	MessageActionRow,
 	MessageButton,
 	ButtonInteraction,
-} = require("discord.js"); //
+} = require("discord.js");
 
 const url = `https://coronavirusapifr.herokuapp.com/data/live/france`;
 const url2 =
@@ -253,7 +253,7 @@ client.on("interactionCreate", async (interaction) => {
 			le ping de kikibot est de ${client.ws.ping} ms (toujours pas plus que celui de la SNCF).\n`
 			)
 			.setFooter(
-				`Kikibot par <@${interaction.guild.ownerId}> Version 1.3.2`
+				`Kikibot par <@${interaction.guild.ownerId}> Version 1.3.5`
 			);
 		interaction.reply({ embeds: [pingembed] });
 	}
