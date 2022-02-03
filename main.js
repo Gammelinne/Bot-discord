@@ -11,7 +11,7 @@ const {
 	MessageActionRow,
 	MessageButton,
 	ButtonInteraction,
-} = require("discord.js");
+} = require("discord.js"); //
 
 const url = `https://coronavirusapifr.herokuapp.com/data/live/france`;
 const url2 =
