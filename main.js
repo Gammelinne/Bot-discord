@@ -355,13 +355,14 @@ client.on("interactionCreate", async (interaction) => {
 			])
 		) {
 			let msg = interaction.options.getString("message");
-			let anoncebed = new MessageEmbed()
+			let annoncebed = new MessageEmbed()
 				.setColor("#33FF7D")
 				.setTitle("Annonce")
 				.setThumbnail(interaction.guild.iconURL())
 				.setDescription(msg);
+			interaction.reply({ embeds: [annoncebed] });
 		} else {
-			interaction.editReply(
+			interaction.reply(
 				`Vous n'avez pas les permissions de cette commande`
 			);
 		}
