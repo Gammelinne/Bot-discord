@@ -349,24 +349,25 @@ client.on("interactionCreate", async (interaction) => {
 		interaction.editReply({ embeds: [nasembed] });
 	}
 	if (interaction.commandName === "annonce") {
-		if (
-			interaction.member.permissions.has([
-				Permissions.FLAGS.ADMINISTRATOR,
-			])
-		) {
-			let msg = interaction.options.getString("message");
-			let annoncebed = new MessageEmbed()
-				.setColor("#33FF7D")
-				.setTitle("Annonce")
-				.setThumbnail(interaction.guild.iconURL())
-				.setDescription(msg);
-			interaction.reply({ embeds: [annoncebed] });
-		} else {
-			interaction.reply(
-				`Vous n'avez pas les permissions de cette commande`
-			);
-		}
+		//if ( A DECOCHER SI TROP DE SPAM
+		//	interaction.member.permissions.has([
+		//		Permissions.FLAGS.ADMINISTRATOR,
+		//	])
+		//) {
+		let msg = interaction.options.getString("message");
+		let annoncebed = new MessageEmbed()
+			.setColor("#33FF7D")
+			.setTitle(`Annonce de ${interaction.user.username}`)
+			.setThumbnail(interaction.guild.iconURL())
+			.setDescription(msg);
+		interaction.reply({ embeds: [annoncebed] });
 	}
+	//else {
+	//	interaction.reply(
+	//		`Vous n'avez pas les permissions de cette commande`
+	//	);
+	//}
+	//}
 });
 
 client.login(process.env.TOKEN);
