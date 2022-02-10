@@ -358,8 +358,9 @@ client.on("interactionCreate", async (interaction) => {
 		let annoncebed = new MessageEmbed()
 			.setColor("#33FF7D")
 			.setTitle(`Annonce de ${interaction.user.username}`)
-			.setThumbnail(interaction.guild.iconURL())
-			.setDescription(msg);
+			.setThumbnail(message.author.displayAvatarURL)
+			.setDescription(msg)
+			.setFooter("Tout abus de la commande sera sanctionné");
 		interaction.reply({ embeds: [annoncebed] });
 	}
 	//else {
