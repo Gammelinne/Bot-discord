@@ -91,7 +91,7 @@ const commands = [
 	},
 	{
 		name: "annonce",
-		description: "permet de mettre une annonce (modo uniquement)",
+		description: "permet de mettre une annonce",
 		options: [
 			{
 				name: "message",
@@ -358,7 +358,7 @@ client.on("interactionCreate", async (interaction) => {
 		let annoncebed = new MessageEmbed()
 			.setColor("#33FF7D")
 			.setTitle(`Annonce de ${interaction.user.username}`)
-			.setThumbnail(message.author.displayAvatarURL)
+			.setThumbnail(interaction.user.displayAvatarURL())
 			.setDescription(msg)
 			.setFooter("Tout abus de la commande sera sanctionné");
 		interaction.reply({ embeds: [annoncebed] });
