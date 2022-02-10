@@ -12,6 +12,7 @@ const {
 	MessageButton,
 	ButtonInteraction,
 } = require("discord.js");
+const { options, required } = require("nodemon/lib/config");
 
 const url = `https://coronavirusapifr.herokuapp.com/data/live/france`;
 const url2 =
@@ -87,6 +88,18 @@ const commands = [
 	{
 		name: "nasa",
 		description: "image du jour",
+	},
+	{
+		name: "annonce",
+		description: "permet de mettre une annonce (modo uniquement)",
+		options: [
+			{
+				name: "message",
+				description: "ecrit ton message ici",
+				required: true,
+				type: discordjs.Constants.ApplicationCommandOptionTypes.STRING,
+			},
+		],
 	},
 ];
 
@@ -334,6 +347,24 @@ client.on("interactionCreate", async (interaction) => {
 			.setDescription(rep.explanation.toString())
 			.setFooter(`API de la Nasa, document du ${rep.date.toString()}`);
 		interaction.editReply({ embeds: [nasembed] });
+	}
+	if (interaction.commandName === "annonce") {
+		if (
+			interaction.member.permissions.has([
+				Permissions.FLAGS.ADMINISTRATOR,
+			])
+		) {
+			let msg = interaction.options.getString("message");
+			let anoncebed = new MessageEmbed()
+				.setColor("#33FF7D")
+				.setTitle("Annonce")
+				.setThumbnail(interaction.guild.iconURL())
+				.setDescription(msg);
+		} else {
+			interaction.editReply(
+				`Vous n'avez pas les permissions de cette commande`
+			);
+		}
 	}
 });
 
