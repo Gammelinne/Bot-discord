@@ -349,7 +349,8 @@ client.on("interactionCreate", async (interaction) => {
 		interaction.editReply({ embeds: [nasembed] });
 	}
 	if (interaction.commandName === "annonce") {
-		//if ( A DECOCHER SI TROP DE SPAM
+		//  A DECOCHER SI TROP DE SPAM
+		//if (
 		//	interaction.member.permissions.has([
 		//		Permissions.FLAGS.ADMINISTRATOR,
 		//	])
