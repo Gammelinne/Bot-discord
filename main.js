@@ -10,7 +10,6 @@ const {
 	Permissions,
 	MessageActionRow,
 	MessageButton,
-	ButtonInteraction,
 } = require("discord.js");
 const { options, required } = require("nodemon/lib/config");
 
@@ -211,15 +210,16 @@ client.on("interactionCreate", async (interaction) => {
 			collector.on("collect", async (i) => {
 				await i.deferReply({ ephemeral: true });
 				console.log(i.customId);
+				raison = interaction.options.getString("raison")
 				if (i.customId == "yes") {
 					try {
 						if (victime.bannable) {
 							await victime.ban({
 								days: 7,
-								reason: interaction.options.getString("raison"),
+								reason: raison
 							});
 							await i.editReply({
-								content: `Le membre ${victimeuser} à été bani parce que ${"raison"}`,
+								content: `Le membre ${victimeuser} à été bani parce que ${raison}`,
 							});
 						} else {
 							i.editReply("Je ne peux pas ban cette personne");
@@ -238,13 +238,13 @@ client.on("interactionCreate", async (interaction) => {
 						);
 					} catch {
 						console.log(
-							"Ca n'a pas marché, ta commande ne marche plus bro"
+							"Ca n'a pas marché, ta commande ne marche plus"
 						);
 					}
 				}
 			});
 
-			collector.on("end", (ButtonInteraction) => {
+			collector.on("end", () => {
 				interaction.editReply({
 					embeds: [embed],
 				});
