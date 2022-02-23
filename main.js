@@ -6,7 +6,7 @@ const { Client, Intents, MessageEmbed } = require("discord.js");
 const discordjs = require("discord.js");
 const fs = require("fs");
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-const {//
+const {
 	Permissions,
 	MessageActionRow,
 	MessageButton,
@@ -330,7 +330,7 @@ client.on("interactionCreate", async (interaction) => {
 	if (interaction.commandName === "nasa") {
 		await interaction.deferReply();
 		var rep = "pas de donnees";
-		await fetch(`${url2}`)
+		await fetch(url2)
 			.then((res) => res.json())
 			.then((json) => (rep = json));
 		let nasembed = new MessageEmbed()
