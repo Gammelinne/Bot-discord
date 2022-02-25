@@ -231,15 +231,15 @@ client.on("interactionCreate", async (interaction) => {
 						});
 					}
 				} else {
-					console.log("no");
 					try {
 						i.editReply(
 							`Vous avez annulé la commande, ${victimeuser} n'a pas été banni`
 						);
 					} catch {
-						console.log(
-							"Ca n'a pas marché, ta commande ne marche plus"
-						);
+						console.log(error);
+						await i.editReply({
+							content: `Il y eu une erreur. Voir la console pour plus d'information`,
+						});
 					}
 				}
 			});
@@ -266,7 +266,7 @@ client.on("interactionCreate", async (interaction) => {
 			le ping de kikibot est de ${client.ws.ping} ms (toujours pas plus que celui de la SNCF).\n`
 			)
 			.setFooter(
-				`Kikibot par <@${interaction.guild.ownerId}> Version 1.3.5`
+				`Kikibot par RENAULT Kylian Version 1.3.5`
 			);
 		interaction.reply({ embeds: [pingembed] });
 	}
