@@ -11,7 +11,9 @@ const {
 	MessageActionRow,
 	MessageButton,
 } = require("discord.js");
-const { options, required } = require("nodemon/lib/config");
+const Twit = require("twit")
+const notifier = require('node-notifier');
+const open = require("open")
 
 const url = `https://coronavirusapifr.herokuapp.com/data/live/france`;
 const url2 =
@@ -100,6 +102,10 @@ const commands = [
 			},
 		],
 	},
+	{
+		name: "test",
+		description: "test"
+	}
 ];
 
 const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
@@ -370,6 +376,18 @@ client.on("interactionCreate", async (interaction) => {
 	//	);
 	//}
 	//}
+	if (interaction.commandName === "test") {
+		interaction.reply("test")
+	}
 });
+var words = ["Antoine"]
 
+for (var i=0; i < words.length; i++) {
+
+	if (message.content.includes(words[i])) {
+
+  interaction.reply("test")
+
+ 	}
+}
 client.login(process.env.TOKEN);
