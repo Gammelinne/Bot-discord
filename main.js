@@ -5,7 +5,7 @@ const fetch = require("node-fetch");
 const { Client, Intents, MessageEmbed } = require("discord.js");
 const discordjs = require("discord.js");
 const fs = require("fs");
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], });
 const {
 	Permissions,
 	MessageActionRow,
@@ -380,14 +380,14 @@ client.on("interactionCreate", async (interaction) => {
 		interaction.reply("test")
 	}
 });
-var words = ["Antoine"]
 
-for (var i=0; i < words.length; i++) {
-
-	if (message.content.includes(words[i])) {
-
-  interaction.reply("test")
-
- 	}
-}
+const word = ["Quoi", "quoi", "Quoi ?", "quoi ?", "kwa", "koua", "Kuoi"];
+	client.on('messageCreate', (message) => {
+	if (message.author.bot) return false;
+	word.forEach(element => {
+		if (message.content.endsWith(element)){
+			message.reply('feur');
+		}
+	});
+});
 client.login(process.env.TOKEN);
