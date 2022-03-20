@@ -2,16 +2,11 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 require("dotenv").config();
 const fetch = require("node-fetch");
-const { Client, Intents, MessageEmbed } = require("discord.js");
+const { Client, Intents, MessageEmbed,Permissions,MessageActionRow,MessageButton, } = require("discord.js");
 const discordjs = require("discord.js");
 const fs = require("fs");
 const { joinVoiceChannel } = require('@discordjs/voice');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], });
-const {
-	Permissions,
-	MessageActionRow,
-	MessageButton,
-} = require("discord.js");
 
 const url = `https://coronavirusapifr.herokuapp.com/data/live/france`;
 const url2 =
@@ -158,10 +153,10 @@ client.on("interactionCreate", async (interaction) => {
 		}
 	}
 
-	if (interaction.commandName === "ban") {
-		await interaction.deferReply({ ephemeral: true });
+	if (interaction.commandName === "ban") { //si la comande est /ban
+		await interaction.deferReply({ ephemeral: true }); //on reponds de façon à ce que seul celui qui a fait la commande puisse voire
 
-		if (
+		if ( //on regarde si l'utilisateur de la commande a les permissions de banir quelqu'un
 			interaction.member.permissions.has(
 				[Permissions.FLAGS.ADMINISTRATOR] ||
 					interaction.member.permissions.has([
@@ -169,41 +164,41 @@ client.on("interactionCreate", async (interaction) => {
 					])
 			)
 		) {
-			let victimeuser = interaction.options.getUser("membre");
+			let victimeuser = interaction.options.getUser("membre"); //on recupère la personne que l'on veut ban
 			let victime = await interaction.guild.members.cache.get(
-				victimeuser.id
+				victimeuser.id //on prends l'id de la personne que l'on veut bannir (car discord ne reconnait pas directement le nom de la personne)
 			);
-			const row = new MessageActionRow()
+			const row = new MessageActionRow() //on crée un bouton oui/non pour demander confirmation a l'utilisateur s'il est sur de son choix
 				.addComponents(
-					new MessageButton()
+					new MessageButton() //création du bouton 1
 						.setCustomId("yes")
 						.setLabel("Confirm")
 						.setStyle("SUCCESS")
 				)
 				.addComponents(
-					new MessageButton()
+					new MessageButton() //création du bouton 2
 						.setCustomId("no")
 						.setLabel("Cancel")
 						.setStyle("DANGER")
 				);
-			const embed = new MessageEmbed()
+			const embed = new MessageEmbed() //on mets le message de confirmation dans un embed qui permet une jolie mise en forme du message.
 				.setColor("#33FF7D")
 				.setTitle("Ban")
 				.setDescription(
 					`Tu es sur le point de ban ${victimeuser}.\n Es-tu sûr de ce choix ?`
 				);
 
-			await interaction.editReply({
+			await interaction.editReply({ //on affiche dans le chat la reponse, les boutons oui et non en ephemeral.
 				components: [row],
 				embeds: [embed],
 				ephemeral: true,
 			});
 
-			const filter = (i) =>
+			const filter = (i) => //on mets le choix de l'utilisateur dans une variable i
 				(i.customId === "yes" || i.customId === "no") &&
 				i.user.id === interaction.member.id;
 
-			const collector =
+			const collector = //Les collecteurs sont utiles pour permettre au bot d’obtenir des entrées *supplémentaires* après l’envoi de la première commande.
 				interaction.channel.createMessageComponentCollector({
 					filter,
 					componentType: "BUTTON",
@@ -211,16 +206,15 @@ client.on("interactionCreate", async (interaction) => {
 					max: 1,
 				});
 
-			collector.on("collect", async (i) => {
+			collector.on("collect", async (i) => { //Il va regarder si l'utilisateur à mis oui ou non
 				await i.deferReply({ ephemeral: true });
-				console.log(i.customId);
 				raison = interaction.options.getString("raison")
-				if (i.customId == "yes") {
+				if (i.customId == "yes") { //si confirmation
 					try {
-						if (victime.bannable) {
-							await victime.ban({
-								days: 7,
-								reason: raison
+						if (victime.bannable) { //on regarde si la personne peut être banni (si c'est un administrateur ou non)
+							await victime.ban({ //on banni la personne
+								days: 7, //banni 7 jours
+								reason: raison //motif
 							});
 							await i.editReply({
 								content: `Le membre ${victimeuser} à été bani parce que ${raison}`,
@@ -228,18 +222,18 @@ client.on("interactionCreate", async (interaction) => {
 						} else {
 							i.editReply("Je ne peux pas ban cette personne");
 						}
-					} catch (error) {
+					} catch (error) { //si la personne ne peut pas être banni ou si il y a une erreur
 						console.log(error);
 						await i.editReply({
 							content: `Il y eu une erreur ou vous ne pouvez pas banir ${victimeuser} Voir la console pour plus d'information`,
 						});
 					}
-				} else {
+				} else { //si l'utilisateur annule la commande
 					try {
 						i.editReply(
 							`Vous avez annulé la commande, ${victimeuser} n'a pas été banni`
 						);
-					} catch {
+					} catch { //si erreur
 						console.log(error);
 						await i.editReply({
 							content: `Il y eu une erreur. Voir la console pour plus d'information`,
@@ -248,12 +242,12 @@ client.on("interactionCreate", async (interaction) => {
 				}
 			});
 
-			collector.on("end", () => {
+			collector.on("end", () => { //on dit au bot d'arreter d'attendre une réponse
 				interaction.editReply({
 					embeds: [embed],
 				});
 			});
-		} else {
+		} else { // si l'uilisateur n'est pas administrateur
 			interaction.editReply("vous n'êtes pas admin");
 		}
 	}
