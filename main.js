@@ -5,15 +5,13 @@ const fetch = require("node-fetch");
 const { Client, Intents, MessageEmbed } = require("discord.js");
 const discordjs = require("discord.js");
 const fs = require("fs");
+const { joinVoiceChannel } = require('@discordjs/voice');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], });
 const {
 	Permissions,
 	MessageActionRow,
 	MessageButton,
 } = require("discord.js");
-const Twit = require("twit")
-const notifier = require('node-notifier');
-const open = require("open")
 
 const url = `https://coronavirusapifr.herokuapp.com/data/live/france`;
 const url2 =
@@ -377,6 +375,12 @@ client.on("interactionCreate", async (interaction) => {
 	//}
 	//}
 	if (interaction.commandName === "test") {
+		/*const Connection = joinVoiceChannel({
+			channelId: channel.id,
+			guildId: channel.guild.id,
+			adapterCreator: channel.guild.voiceAdapterCreator,
+		});
+		getVoiceConnection(myVoiceChannel.guild.id);*/
 		interaction.reply("test")
 	}
 });
@@ -390,4 +394,5 @@ const word = ["Quoi", "quoi", "Quoi ?", "quoi ?", "kwa", "koua", "Kuoi"];
 		}
 	});
 });
+
 client.login(process.env.TOKEN);
