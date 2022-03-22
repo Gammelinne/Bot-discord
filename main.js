@@ -5,8 +5,11 @@ const fetch = require("node-fetch");
 const { Client, Intents, MessageEmbed,Permissions,MessageActionRow,MessageButton, } = require("discord.js");
 const discordjs = require("discord.js");
 const fs = require("fs");
-const { joinVoiceChannel } = require('@discordjs/voice');
+//const { joinVoiceChannel } = require('@discordjs/voice');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], });
+
+const wordquoi = ["Quoi", "quoi", "Quoi ?", "quoi ?", "kwa", "koua", "Kuoi"];
+const wordoui = ["oui", "Oui", "ui", "wii"];
 
 const url = `https://coronavirusapifr.herokuapp.com/data/live/france`;
 const url2 =
@@ -377,16 +380,22 @@ client.on("interactionCreate", async (interaction) => {
 		getVoiceConnection(myVoiceChannel.guild.id);*/
 		interaction.reply("test")
 	}
+
 });
 
-const word = ["Quoi", "quoi", "Quoi ?", "quoi ?", "kwa", "koua", "Kuoi"];
-	client.on('messageCreate', (message) => {
+
+client.on('messageCreate', (message) => {
 	if (message.author.bot) return false;
-	word.forEach(element => {
+	wordquoi.forEach(element => {
 		if (message.content.endsWith(element)){
-			message.reply('feur');
+			message.reply('feur')
 		}
-	});
+	})
+	wordoui.forEach(element =>{
+		if(message.content.endsWith(element)){
+			message.reply("stiti")
+		}
+	})
 });
 
 client.login(process.env.TOKEN);
