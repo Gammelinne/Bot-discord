@@ -387,12 +387,12 @@ client.on("interactionCreate", async (interaction) => {
 client.on('messageCreate', (message) => {
 	if (message.author.bot) return false;
 	wordquoi.forEach(element => {
-		if (message.content.endsWith(element)){
+		if (message.content.toLowerCase(endsWith(element))){
 			message.reply('feur')
 		}
 	})
 	wordoui.forEach(element =>{
-		if(message.content.endsWith(element)){
+		if(message.content.toLowerCase(endsWith(element))){
 			message.reply("stiti")
 		}
 	})
