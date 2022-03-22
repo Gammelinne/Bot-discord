@@ -9,7 +9,7 @@ const fs = require("fs");
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], });
 
 const wordquoi = ["Quoi", "quoi", "Quoi ?", "quoi ?", "kwa", "koua", "Kuoi"];
-const wordoui = ["oui", "Oui", "ui", "wii"];
+const wordoui = ["oui", "ui", "wii"];
 
 const url = `https://coronavirusapifr.herokuapp.com/data/live/france`;
 const url2 =
