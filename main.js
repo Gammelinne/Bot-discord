@@ -9,7 +9,7 @@ const fs = require("fs");
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], });
 
 const wordquoi = ["Quoi", "quoi", "Quoi ?", "quoi ?", "kwa", "koua", "Kuoi"];
-const wordoui = ["oui", "ui", "wii"];
+const wordoui = ["oui", "Oui", "ui", "wii"];
 
 const url = `https://coronavirusapifr.herokuapp.com/data/live/france`;
 const url2 =
@@ -387,12 +387,12 @@ client.on("interactionCreate", async (interaction) => {
 client.on('messageCreate', (message) => {
 	if (message.author.bot) return false;
 	wordquoi.forEach(element => {
-		if (message.content.toLowerCase(endsWith(element))){
+		if (message.content.endsWith(element)){
 			message.reply('feur')
 		}
 	})
 	wordoui.forEach(element =>{
-		if(message.content.toLowerCase(endsWith(element))){
+		if(message.content.endsWith(element)){
 			message.reply("stiti")
 		}
 	})
