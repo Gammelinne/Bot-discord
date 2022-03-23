@@ -98,8 +98,8 @@ const commands = [
 		],
 	},
 	{
-		name: "test",
-		description: "test"
+		name: "seul",
+		description: "permet de te sentir moin seul"
 	}
 ];
 
@@ -370,7 +370,7 @@ client.on("interactionCreate", async (interaction) => {
 	//	);
 	//}
 	//}
-	if (interaction.commandName === "test") {
+	if (interaction.commandName === "seul") {
 		const Connection = joinVoiceChannel({
 			channelId: interaction.member.voice.channel.id,
 			guildId: interaction.guild.id,
