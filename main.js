@@ -2,10 +2,9 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 require("dotenv").config();
 const fetch = require("node-fetch");
-const { Client, Intents, MessageEmbed,Permissions,MessageActionRow,MessageButton, } = require("discord.js");
+const {Client, Intents, MessageEmbed,Permissions,MessageActionRow,MessageButton} = require("discord.js");
 const discordjs = require("discord.js");
-const fs = require("fs");
-//const { joinVoiceChannel } = require('@discordjs/voice');
+const { joinVoiceChannel } = require("@discordjs/voice");
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], });
 
 const wordquoi = ["Quoi", "quoi", "Quoi ?", "quoi ?", "kwa", "koua", "Kuoi"];
@@ -372,22 +371,22 @@ client.on("interactionCreate", async (interaction) => {
 	//}
 	//}
 	if (interaction.commandName === "test") {
-		/*const Connection = joinVoiceChannel({
-			channelId: channel.id,
-			guildId: channel.guild.id,
-			adapterCreator: channel.guild.voiceAdapterCreator,
+		const Connection = joinVoiceChannel({
+			channelId: interaction.member.voice.channel.id,
+			guildId: interaction.guild.id,
+			adapterCreator: interaction.guild.voiceAdapterCreator,
 		});
-		getVoiceConnection(myVoiceChannel.guild.id);*/
-		interaction.reply("test")
 	}
 
 });
 
 
 client.on('messageCreate', (message) => {
+	console.log(message)
 	if (message.author.bot) return false;
 	wordquoi.forEach(element => {
 		if (message.content.endsWith(element)){
+			console.log(message)
 			message.reply('feur')
 		}
 	})
