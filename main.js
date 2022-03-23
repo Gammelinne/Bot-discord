@@ -376,6 +376,7 @@ client.on("interactionCreate", async (interaction) => {
 			guildId: interaction.guild.id,
 			adapterCreator: interaction.guild.voiceAdapterCreator,
 		});
+		interaction.reply("tu es moins seul maintenant")
 	}
 
 });
