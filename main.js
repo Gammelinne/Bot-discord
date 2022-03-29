@@ -98,7 +98,7 @@ const commands = [
 		],
 	},
 	{
-		name: "zemmour",
+		name: "seul",
 		description: "permet de te sentir moin seul"
 	}
 ];
@@ -370,15 +370,14 @@ client.on("interactionCreate", async (interaction) => {
 	//	);
 	//}
 	//}
-	if (interaction.commandName === "zemmour") {
+	if (interaction.commandName === "seul") {
 		const Connection = joinVoiceChannel({
 			channelId: interaction.member.voice.channel.id,
 			guildId: interaction.guild.id,
 			adapterCreator: interaction.guild.voiceAdapterCreator,
-		});
+		})
 	}
 });
-
 
 client.on('messageCreate', (message) => {
 	if(message.author.bot) return;
