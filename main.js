@@ -4,16 +4,16 @@ require("dotenv").config();
 const fetch = require("node-fetch");
 const {Client, Intents, MessageEmbed,Permissions,MessageActionRow,MessageButton} = require("discord.js");
 const discordjs = require("discord.js");
+const ytdl = require('ytdl-core');
 const { joinVoiceChannel } = require("@discordjs/voice");
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], });
 
-const wordquoi = ["Quoi", "quoi", "Quoi ?", "quoi ?", "kwa", "koua", "Kuoi"];
-const wordoui = ["oui", "Oui", "ui", "wii"];
+const wordquoi = ["Quoi", "quoi", "Quoi ?", "quoi ?", "kwa", "koua", "kuoi"];
+const wordoui = [ "Ui", "ui", "wii"];
 
 const url = `https://coronavirusapifr.herokuapp.com/data/live/france`;
 const url2 =
 	"https://api.nasa.gov/planetary/apod?api_key=IHPFzp4pl4wlJYEAstrfPs12VYjHdKOkbbC8LZxo";
-
 var mystere = Math.floor(Math.random() * 100 + 1);
 
 const commands = [
@@ -98,7 +98,7 @@ const commands = [
 		],
 	},
 	{
-		name: "seul",
+		name: "zemmour",
 		description: "permet de te sentir moin seul"
 	}
 ];
@@ -370,25 +370,21 @@ client.on("interactionCreate", async (interaction) => {
 	//	);
 	//}
 	//}
-	if (interaction.commandName === "seul") {
+	if (interaction.commandName === "zemmour") {
 		const Connection = joinVoiceChannel({
 			channelId: interaction.member.voice.channel.id,
 			guildId: interaction.guild.id,
 			adapterCreator: interaction.guild.voiceAdapterCreator,
 		});
-		interaction.reply("tu es moins seul maintenant")
 	}
-
 });
 
 
 client.on('messageCreate', (message) => {
-	console.log(message)
-	if (message.author.bot) return false;
+	if(message.author.bot) return;
 	wordquoi.forEach(element => {
 		if (message.content.endsWith(element)){
-			console.log(message)
-			message.reply('feur')
+			message.reply("test")
 		}
 	})
 	wordoui.forEach(element =>{
