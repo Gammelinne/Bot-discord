@@ -383,7 +383,7 @@ client.on('messageCreate', (message) => {
 	if(message.author.bot) return;
 	wordquoi.forEach(element => {
 		if (message.content.endsWith(element)){
-			message.reply("test")
+			message.reply("feur")
 		}
 	})
 	wordoui.forEach(element =>{
