@@ -391,6 +391,9 @@ client.on('messageCreate', (message) => {
 			message.reply("stiti")
 		}
 	})
+	if (message.author.id === "767419104784416778"){
+		message.reply(`Ta gueule ${message.author.username}`)
+	}
 });
 
 client.login(process.env.TOKEN);
