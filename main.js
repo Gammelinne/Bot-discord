@@ -391,7 +391,7 @@ client.on('messageCreate', (message) => {
 			message.reply("stiti")
 		}
 	})
-	if (message.author.id === "692774334204346388"){ //julie = 767419104784416778
+	if (message.author.id === "692774334204346388" || message.author.id === "767419104784416778"){ 
 		message.author.send(`Ta gueule ${message.author.username}`)
 	}
 });
