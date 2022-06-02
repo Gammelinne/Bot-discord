@@ -392,7 +392,7 @@ client.on('messageCreate', (message) => {
 		}
 	})
 	if (message.author.id === "692774334204346388"){ //julie = 767419104784416778
-		message.reply(`Ta gueule ${message.author.username}`)
+		message.author.send(`Ta gueule ${message.author.username}`)
 	}
 });
 
